@@ -132,12 +132,12 @@ func newRequest(method, reqURL string, reqBody, resp interface{}) error {
 	}
 
 	req, err := http.NewRequest(method, newURL, body)
-	req.Header.Set("Content-Type", "application/json")
-	req.Header.Set("Token", secretToken)
-
 	if err != nil {
 		return errors.Wrap(err, "http client ::: unable to create request body")
 	}
+
+	req.Header.Set("Content-Type", "application/json")
+	req.Header.Set("token", secretToken)
 
 	res, err := client.Do(req)
 	if err != nil {
